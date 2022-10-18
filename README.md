@@ -20,7 +20,7 @@ Intensity and energy meter of ultraviolet c-band (UVC) radiations
     + [sensor.cpp , sensor.cpp](#sensorcpp--sensorcpp)
     + [oled.h , oled.cpp](#oledh--oledcpp)
     + [sprint.h , sprint.cpp](#sprinth--sprintcpp)
-  * [Folder structure](#folder-structure)
+- [Folder structure](#folder-structure)
 - [References](#references)
 
 During the COVID-19 pandemic we were able to wear face masks, gloves, keeping social distances, periodically sanitizing our hands and everything we touch. Despite all this, the pandemic shown us how vulnerable we are when we are infected through our smartphones as we touch things and not always have possibility to disinfect smartphones before we touch them again. There wasn't an efficient and practical means to keep our smartphones virus-safe except using the UVC disinfectors that inactivate the virus.
@@ -158,7 +158,7 @@ Contain functions aimed to display the measurement data or wavelength. More info
 
 Arduino's famous `Serial.print()` function and little formatting! All this module does is just to print on the computer's serial. Nothing really much to describe!
 
-## Folder structure
+# Folder structure
 
 | lev 0 | lev 1 | lev 2 | Description |
 | ---     | ---     | ---     | ---         |
