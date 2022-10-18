@@ -5,19 +5,37 @@ Intensity and energy meter of ultraviolet c-band (UVC) radiations
 
 > _Let's turn the Arduino board into precise ultraviolet c-band radiation's intensity and energy meter!_
 
+- [Circuits](#circuits)
+  * [Hardware configuration #1](#hardware-configuration-1)
+  * [Hardware configuration #2](#hardware-configuration-2)
+  * [Hardware configuration #3](#hardware-configuration-3)
+  * [BOM](#bom)
+- [Software](#software)
+  * [General description](#general-description)
+  * [Configuration](#configuration)
+  * [Software files](#software-files)
+    + [uvcMeter.ino](#uvcmeterino)
+    + [common.h](#commonh)
+    + [fsm.h , fsm.cpp , fsm_transition.cpp](#fsmh--fsmcpp--fsm_transitioncpp)
+    + [sensor.cpp , sensor.cpp](#sensorcpp--sensorcpp)
+    + [oled.h , oled.cpp](#oledh--oledcpp)
+    + [sprint.h , sprint.cpp](#sprinth--sprintcpp)
+  * [Folder structure](#folder-structure)
+- [References](#references)
+
 During the COVID-19 pandemic we were able to wear face masks, gloves, keeping social distances, periodically sanitizing our hands and everything we touch. Despite all this, the pandemic shown us how vulnerable we are when we are infected through our smartphones as we touch things and not always have possibility to disinfect smartphones before we touch them again. There wasn't an efficient and practical means to keep our smartphones virus-safe except using the UVC disinfectors that inactivate the virus.
 
 Dishonest sellers around the world took advantage of the situation and sold many fake UVC disinfectors that emit ultraviolet lights (as our eyes see), but not necessarily radiating the ultraviolet lights in the germicidal range, so called C-rays, within the wavelength from 200 nm to 280 nm [1]. I myself became a victim of such "UVC disinfecting bulbs", and not once.
 
 UVC meters sold by Amazon range between 100 and 300 USD (3+ stars); some "exotic" UVC meters exceed 600 USD. Hence, I started pondering how we could device ourselves one for affordable cost.
 
-Below I describe various hardware configurations of UVC meter that will cost you, apart from your Arduino Uno board, a 20 USD UV sensor module, and any generic push button that lays around. This is the minimum hardware you can start with. Depending on your needs and requirements, you can add some other parts and modules into your breadboard that will improve the accuracy, autonomy and functionality of the UVC sensor (refer to [Circuits](https://github.com/wintilimited/uvcMeter#circuits) section below).
+Below I describe various hardware configurations of UVC meter that will cost you, apart from your Arduino Uno board, a 20 USD UV sensor module, and any generic push button that lays around. This is the minimum hardware you can start with. Depending on your needs and requirements, you can add some other parts and modules into your breadboard that will improve the accuracy, autonomy and functionality of the UVC sensor (refer to [Circuits](#circuits) section below).
 
 # Circuits
 
 ## Hardware configuration #1
 
-This configuration requires the Arduino Uno, the UV sensor module and any generic push button (refer to below schematic and [BOM](https://github.com/wintilimited/uvcMeter#bom) section).
+This configuration requires the Arduino Uno, the UV sensor module and any generic push button (refer to below schematic and [BOM](#bom) section).
 
 ![Hardware Configuration #1](docs/pics/uvcMeter_config_1.png)
 
@@ -32,7 +50,7 @@ This configuration requires the Arduino Uno, the UV sensor module and any generi
 
 ## Hardware configuration #2
 
-The limitations with the measurement accuracy of the [Hardware configuration #1](https://github.com/wintilimited/uvcMeter#hardware-configuration-1) can be resolved if we are able to "feed" the ADC conversion with stable and accurate reference voltage. This configuration attempts to solve the limitation with use of widely available generic Precision Programmable Reference with couple of widely available generic components (refer to below schematic and [BOM](https://github.com/wintilimited/uvcMeter#bom) section).
+The limitations with the measurement accuracy of the [Hardware configuration #1](#hardware-configuration-1) can be resolved if we are able to "feed" the ADC conversion with stable and accurate reference voltage. This configuration attempts to solve the limitation with use of widely available generic Precision Programmable Reference with couple of widely available generic components (refer to below schematic and [BOM](#bom) section).
 
 ![Hardware Configuration #1](docs/pics/uvcMeter_config_2.png)
 
@@ -96,7 +114,7 @@ Resetting the energy counter and setting/changing the wavelength of the UVC radi
 
 ## Configuration
 
-Depending of the selected/assembled [hardware configuration](https://github.com/wintilimited/uvcMeter#circuits), the "tuning" the software is pretty straight forward. You need to open commmon.h file and uncomment the line corresponding to your configuration.
+Depending of the selected/assembled [hardware configuration](#circuits), the "tuning" the software is pretty straight forward. You need to open commmon.h file and uncomment the line corresponding to your configuration.
 
 ``` C++
 // HARDWARE CONFIGURATION OPTION
@@ -120,7 +138,7 @@ As the events are detected in the "pulling" manner, it requires that the sensor'
 
 ### common.h
 
-As the project contains many *.h and *.cpp files, the exchange of data/information between modules becomes a bit tedious. Hence this header file is there containing of all "extern" variable. Apart from this, the common.h file is used to select the hardware configuration (refer to [Configuration](https://github.com/wintilimited/uvcMeter#circuits) section above), and you can define the pins you used in the hardware assembly and time periods if default values need to change.
+As the project contains many *.h and *.cpp files, the exchange of data/information between modules becomes a bit tedious. Hence this header file is there containing of all "extern" variable. Apart from this, the common.h file is used to select the hardware configuration (refer to [Configuration](#circuits) section above), and you can define the pins you used in the hardware assembly and time periods if default values need to change.
 
 ### fsm.h , fsm.cpp , fsm_transition.cpp
 
