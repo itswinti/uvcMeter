@@ -3,7 +3,7 @@ Intensity and energy meter of ultraviolet c-band (UVC) radiations
 
 ![Arduino UVC meter](/docs/pics/uvcMeter.png)
 
-> _Let's turn the Arduino board into precise ultraviolet c-band radiation's intensity and energy meter!_
+> _Let's turn the Arduino Uno board into precise ultraviolet c-band radiation's intensity and energy meter!_
 
 - [Circuits](#circuits)
   * [Hardware configuration #1](#hardware-configuration-1)
@@ -20,6 +20,7 @@ Intensity and energy meter of ultraviolet c-band (UVC) radiations
     + [sensor.cpp , sensor.cpp](#sensorcpp--sensorcpp)
     + [oled.h , oled.cpp](#oledh--oledcpp)
     + [sprint.h , sprint.cpp](#sprinth--sprintcpp)
+- [Support for Arduino Pro Mini](#support-for-arduino-pro-mini)
 - [Folder structure](#folder-structure)
 - [References](#references)
 
@@ -157,6 +158,53 @@ Contain functions aimed to display the measurement data or wavelength. More info
 ### sprint.h , sprint.cpp
 
 Arduino's famous `Serial.print()` function and little formatting! All this module does is just to print on the computer's serial. Nothing really much to describe!
+
+## Support for Arduino Pro Mini
+
+Although the project was built for Arduino Uno, the software can be used for Arduino Pro Mini with little tweaks. The issue with Arduino Pro Mini is that it doesn't have AREF pin brought out as an external pin. Hence, we cannot "feed" ADC with the external reference voltage. Therefore, assembling the external voltage reference as in the [Hardware configuration #2](#hardware-configuration-2) is meaningless.
+
+Hence, irrespective of the chosen hardware configuration (i.e. whether it is #1 or #3), make sure that in the `setup()` function in `"uvcMeter.ino"` file replace the following code block:
+``` C++
+// Reference voltage source for ADC conversion
+// and ADC channel selection
+#if HCONFIG == 1
+  ADMUX |= (1<<REFS0);                            // Select Vref=AVcc
+  ADMUX = (ADMUX & 0xF0) | (SENSOR_PIN  & 0x0F);  // Select ADC channel
+#else
+  // AREF (external reference voltage)
+  ADMUX |= (0<<REFS1) | (0<<REFS0);               // Select Vref=AREF
+  ADMUX = (ADMUX & 0xF0) | (SENSOR_PIN  & 0x0F);  // Select ADC channel
+#endif
+```
+
+with the following code block
+``` C++
+// Reference voltage source for ADC conversion
+// and ADC channel selection
+ADMUX |= (1<<REFS0);                            // Select Vref=AVcc
+ADMUX = (ADMUX & 0xF0) | (SENSOR_PIN  & 0x0F);  // Select ADC channel
+```
+
+Apart from that, replace the following code block in `common.h` file:
+``` C++
+// Voltage Reference for ADC conversion depending on
+// selected above Hardware Configuration Option
+#if HCONFIG == 1
+  #define AREF        5.0           // AVcc (Volt)
+#else
+  #define AREF        2.495         // External reference voltage (Volt)
+                                    // applied at AREF pin of Arduino Uno
+#endif
+```
+
+must be replaced by this:
+``` C++
+// Voltage Reference for ADC conversion
+#define AREF        5.0           // AVcc (Volt)
+```
+
+
+
 
 # Folder structure
 
