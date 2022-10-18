@@ -11,13 +11,13 @@ Dishonest sellers around the world took advantage of the situation and sold many
 
 UVC meters sold by Amazon range between 100 and 300 USD (3+ stars); some "exotic" UVC meters exceed 600 USD. Hence, I started pondering how we could device ourselves one for affordable cost.
 
-Below I describe various hardware configurations of UVC meter that will cost you, apart from your Arduino Uno board, a 20 USD UV sensor module, and any generic push button that lays around. This is the minimum hardware you can start with. Depending on your needs and requirements, you can add some other parts and modules into your breadboard that will improve the accuracy, autonomy and functionality of the UVC sensor (refer to [Circuits section](URL here**)) below.
+Below I describe various hardware configurations of UVC meter that will cost you, apart from your Arduino Uno board, a 20 USD UV sensor module, and any generic push button that lays around. This is the minimum hardware you can start with. Depending on your needs and requirements, you can add some other parts and modules into your breadboard that will improve the accuracy, autonomy and functionality of the UVC sensor (refer to [Circuits](https://github.com/wintilimited/uvcMeter#circuits) section below).
 
 # Circuits
 
 ## Hardware configuration #1
 
-This configuration requires the Arduino Uno, the UV sensor module and any generic push button (refer to below schematic and [BOM section](URL here**)).
+This configuration requires the Arduino Uno, the UV sensor module and any generic push button (refer to below schematic and [BOM](https://github.com/wintilimited/uvcMeter#bom) section).
 
 ![Hardware Configuration #1](docs/pics/uvcMeter_config_1.png)
 
@@ -32,7 +32,7 @@ This configuration requires the Arduino Uno, the UV sensor module and any generi
 
 ## Hardware configuration #2
 
-The limitations with the measurement accuracy of the ![Hardware configuration #1](URL here) can be resolved if we are able to "feed" the ADC conversion with stable and accurate reference voltage. This configuration attempts to solve the limitation with use of widely available generic Precision Programmable Reference with couple of widely available generic components (refer to below schematic and [BOM section](URL here)).
+The limitations with the measurement accuracy of the [Hardware configuration #1](https://github.com/wintilimited/uvcMeter#hardware-configuration-1) can be resolved if we are able to "feed" the ADC conversion with stable and accurate reference voltage. This configuration attempts to solve the limitation with use of widely available generic Precision Programmable Reference with couple of widely available generic components (refer to below schematic and [BOM](https://github.com/wintilimited/uvcMeter#bom) section).
 
 ![Hardware Configuration #1](docs/pics/uvcMeter_config_2.png)
 
@@ -96,7 +96,7 @@ Resetting the energy counter and setting/changing the wavelength of the UVC radi
 
 ## Configuration
 
-Depending of the selected/assembled hardware [configuration](URL here), the "tuning" the software is pretty straight forward. You need to open commmon.h file and uncomment the line corresponding to your configuration.
+Depending of the selected/assembled [hardware configuration](https://github.com/wintilimited/uvcMeter#circuits), the "tuning" the software is pretty straight forward. You need to open commmon.h file and uncomment the line corresponding to your configuration.
 
 ``` C++
 // HARDWARE CONFIGURATION OPTION
@@ -120,7 +120,7 @@ As the events are detected in the "pulling" manner, it requires that the sensor'
 
 ### common.h
 
-As the project contains many *.h and *.cpp files, the exchange of data/information between modules becomes a bit tedious. Hence this header file is there containing of all "extern" variable. Apart from this, the common.h file is used to select the hardware configuration (refer to [Configuration](URL here) section), and you can define the pins you used in the hardware assembly and time periods if default values need to change.
+As the project contains many *.h and *.cpp files, the exchange of data/information between modules becomes a bit tedious. Hence this header file is there containing of all "extern" variable. Apart from this, the common.h file is used to select the hardware configuration (refer to [Configuration](https://github.com/wintilimited/uvcMeter#circuits) section above), and you can define the pins you used in the hardware assembly and time periods if default values need to change.
 
 ### fsm.h , fsm.cpp , fsm_transition.cpp
 
